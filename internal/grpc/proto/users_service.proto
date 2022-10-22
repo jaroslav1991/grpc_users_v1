@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package api.v1;
+
+option go_package = "internal/grpc/pb";
+
+service Users {
+  rpc Create(CreateUserRequest) returns (CreateUserResponse) {}
+  rpc GetById(FindUserByIdRequest) returns (FindUserByIdResponse) {}
+  rpc GetByEmail(FindUsersByEmailRequest) returns (FindUsersByEmailResponse) {}
+}
+
+
+message CreateUserRequest {
+  string name = 1;
+  string email = 2;
+  string password_hash = 3;}
+
+message CreateUserResponse {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;}
+
+message FindUserByIdRequest {
+  int64 id = 1;
+}
+
+message FindUserByIdResponse {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;}
+
+message FindUsersByEmailRequest {
+  string email = 1;
+}
+
+message FindUsersByEmailResponse {
+ repeated readUser users = 1;
+}
+
+message readUser {
+  int64 id =1;
+  string name = 2;
+  string email = 3;
+}
