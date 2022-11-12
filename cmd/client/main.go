@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	conn, err := grpc.Dial(":8080", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.Dial(":8081", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -25,9 +25,21 @@ func main() {
 	//	log.Fatal(err)
 	//}
 	//log.Println(res)
-	res, err := c.GetByEmail(context.Background(), &pb.FindUsersByEmailRequest{Email: "%gmail%"})
+	//res, err := c.GetByEmail(context.Background(), &pb.FindUsersByEmailRequest{Email: "%gmail%"})
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//log.Println(res)
+	//
+	res1, err := c.SignUp(context.Background(), &pb.SignUpRequest{Name: "admin", Email: "admin@gmail.com", PasswordHash: "admin"})
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Println(res)
+	log.Println(res1)
+	//
+	//res, err := c.CreatePost(context.Background(), &pb.CreatePostRequest{Title: "test", Message: "testing message"})
+	//if err != nil {
+	//	log.Println(err)
+	//}
+	//log.Println(res)
 }
